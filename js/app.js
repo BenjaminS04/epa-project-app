@@ -1,9 +1,9 @@
-// Include the AWS SDK in your web app
+// Include the AWS SDK in web app
 const AWS = require('aws-sdk');
 
 // Configure the SDK with the appropriate region and credentials
 AWS.config.update({
-    region: 'us-east-1' // Use the region where your EC2 instance is running
+    region: 'us-east-1' // Use the region where the EC2 instance is running
 });
 
 // Create a new CloudWatch client
@@ -41,6 +41,6 @@ cloudwatch.getMetricData(params, (err, data) => {
         console.log("Error fetching metrics: ", err);
     } else {
         console.log("Fetched metrics: ", data);
-        // Here you can update your web app's front end to display the metrics
+        // Here you can update the web app's front end to display the metrics
     }
 });
