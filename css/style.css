@@ -1,0 +1,37 @@
+/*style for webpage body*/
+body {
+    font-family: arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/*centers main container and pads*/
+#app{
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/*fetch btn style*/
+button{
+    background-color: #fff025;
+    color: #f4f4f4;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+/*button hover effect*/
+button:hover{
+    color: #fff025;
+}
+
+/*fetched api data container style*/
+#dataContainer {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #e0e0e0;    
+}
