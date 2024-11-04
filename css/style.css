@@ -32,10 +32,10 @@ input, button{
 
 /*style for metric cards*/
 .metric-card{
-    background-color: #dadace;
+    background-color: #f3f3eb;
     padding: 15px;
     border-radius: 6px;
-    border: 1px solid #a6a6a6;
+    border: 1px solid #c9c9c9;
 }
 
 /*style for metric values*/
@@ -47,7 +47,7 @@ input, button{
 
 /*button style*/
 button{
-    background-color: #fff025;
+    background-color: #fbff00;
     color: #f4f4f4;
     padding: 10px 20px;
     border: none;
@@ -56,12 +56,6 @@ button{
 
 /*button hover effect*/
 button:hover{
-    color: #fff025;
+    color: #b3b300;
 }
 
-/*fetched api data container style*/
-#dataContainer {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #e0e0e0;    
-}

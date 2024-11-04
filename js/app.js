@@ -1,38 +1,54 @@
-// Include the AWS SDK in web app
-const AWS = require('aws-sdk');
-
-// Configure the SDK with the appropriate region and credentials
-AWS.config.update({
-    region: 'us-east-1' // Use the region where the EC2 instance is running
-});
-
-// Create a new CloudWatch client
-const cloudwatch = new AWS.CloudWatch();
-
-// Defines the parameters for the GetMetricData API request
-const params = {
-    StartTime: new Date(new Date() - 60 * 60 * 1000), // 1 hour ago
-    EndTime: new Date(),
-    MetricDataQueries: [
-        {
-            Id: 'cpuUtilization',
-            MetricStat: {
-                Metric: {
-                    Namespace: 'AWS/EC2',
-                    MetricName: 'CPUUtilization',
-                    Dimensions: [
-                        {
-                            Name: 'InstanceId',
-                            Value: 'YOUR_INSTANCE_ID'
-                        }
-                    ]
+// global variables
+let monitoring = false;
+let monitoringInterval;
+const dataPoints = {
+    cpu:[],
+    diskRead:[]
+}
+// initialise AWS SDK
+function initAWS(region) {
+    AWS.config.region = region
+    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId:'' //leave empty as app should use the instance's assigned role
+    })
+    return new AWS.Cloudwatch
+}
+// Defines the parameters for the GetMetricData API request, async used to allow use of promise
+async function getMetrics(cloudwatch, instanceId) {
+    StartTime = new Date(new Date() - 300000); // last 5 mins
+    EndTime = new Date();
+    const params = {
+        MetricDataQueries: [
+            {
+                Id: 'cpuUtilization',
+                MetricStat: {
+                    Metric: {
+                        Namespace: 'AWS/EC2',
+                        MetricName: 'CPUUtilization',
+                        Dimensions: [
+                            {
+                                Name: 'InstanceId',
+                                Value: instanceId
+                            }
+                        ]
+                    },
+                    Period: 60, // Get data at 1-minute intervals
+                    Stat: 'Average'
                 },
-                Period: 60, // Get data at 1-minute intervals
-                Stat: 'Average'
-            },
-            ReturnData: true
-        }
-    ]
+                ReturnData: true
+            }
+        ],
+        StartTime: StartTime,
+        EndTime:EndTime
+    };
+
+    // returns promise to fetch metrics from cloudwatch
+    return new Promise((resolve, reject)=>{
+        cloudwatch.getMetricData(params, (err, data) =>{
+            if (err) reject(err);
+            else resolve(data);
+        });
+    });
 };
 
 // Call the GetMetricData API
