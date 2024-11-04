@@ -23,10 +23,20 @@
             <button onclick= "StartMonitoring()"></button>
             <button onclick= "StopMonitoring()" id="stopBtn" style="display: none;">Stop</button>
         </div>
-        <!-- grid layout for metrics-->
-        <div class="metrics-grid"></div>
-        <!-- fetched data container -->
-        <div id="dataContainer"></div>
+        <!-- grid layout for metrics -->
+        <div class="metrics-grid">
+            <!-- spaces for the individual metrics -->
+            <div class="metric-card">
+                <h2>CPU Utilization</h2>
+                <div id="cpu" class="metric-value">-</div>
+            </div>
+            
+            <div class="metric-card">
+                <h2>Disk Reads</h2>
+                <div id="diskRead" class="metric-value">-</div>
+            </div>
+        </div>
+        
     </div>
 
     <!-- link to js app -->
