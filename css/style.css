@@ -7,12 +7,21 @@ body {
 }
 
 /*centers main container and pads*/
-#app{
-    max-width: 800px;
+.container{
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    border-radius: 8px;
     background: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/*shared style for buttons and inputs*/
+input, button{
+    padding: 8px;
+    margin: 5px;
+    border: 1px solid #dadace;
+    border-radius: 4px;
 }
 
 /*fetch btn style*/
