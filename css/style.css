@@ -1,7 +1,7 @@
 /*style for webpage body*/
 body {
     font-family: arial, sans-serif;
-    background-color: #161616;
+    background-color: #c6c6c6;
     margin: 0;
     padding: 0;
 }
@@ -22,6 +22,20 @@ input, button{
     margin: 5px;
     border: 1px solid #dadace;
     border-radius: 4px;
+}
+
+/*button style*/
+button{
+    background-color: #fbff00;
+    color: #b3b300;
+    border: none;
+    cursor: pointer;
+}
+
+/*button hover effect*/
+button:hover{
+    color: #e9e980;
+    background-color: #b3b300;
 }
 
 /*metric grid style*/
@@ -45,17 +59,5 @@ input, button{
     color: #161616;
 }
 
-/*button style*/
-button{
-    background-color: #fbff00;
-    color: #f4f4f4;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-}
 
-/*button hover effect*/
-button:hover{
-    color: #b3b300;
-}
 
