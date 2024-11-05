@@ -11,7 +11,7 @@ function initAWS(region) {
     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
         IdentityPoolId:'' //leave empty as app should use the instance's assigned role
     })
-    return new AWS.cloudwatch()
+    return new AWS.Cloudwatch();
 }
 // Defines the parameters for the GetMetricData API request, async used to allow use of promise
 async function getMetrics(cloudwatch, instanceId) {
