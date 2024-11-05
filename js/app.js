@@ -68,6 +68,9 @@ async function startMonitoring() {
         alert("please enter Instance ID and region")
         return
     }
+
+    console.log("starting monitoring")
+
     monitoring = true;
     document.getElementById("stopBtn").style.display = "inline";
 
@@ -82,11 +85,14 @@ async function startMonitoring() {
             stopMonitoring();
             alert("error fetching metric data!")
         }
-
-        await fetchData();
-
-        monitoringInterval =setInterval(fetchData, 60000);
+        
+        
     }
+    console.log("running wait fetch")
+    await fetchData();
+    console.log("data fetch attempted")
+
+    monitoringInterval =setInterval(fetchData, 60000);
 
     // function to stop monitoring
     function stopMonitoring() {
