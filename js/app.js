@@ -11,7 +11,7 @@ function initAWS(region) {
     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
         IdentityPoolId:'' //leave empty as app should use the instance's assigned role
     })
-    return new AWS.Cloudwatch()
+    return new AWS.cloudwatch()
 }
 // Defines the parameters for the GetMetricData API request, async used to allow use of promise
 async function getMetrics(cloudwatch, instanceId) {
@@ -55,17 +55,19 @@ async function getMetrics(cloudwatch, instanceId) {
 function updateMetricsDisplay(data) {
     const timestamp = new Date().toLocaleTimeString();
 
-    document.getElementById("cpu").textContent = "${data.MetricDataResults[0].Values[0]?.toFixed(2) || 0}%";
+    document.getElementById("cpu").textContent = '${data.MetricDataResults[0].Values[0]?.toFixed(2) || 0}%';
 }
 
 async function startMonitoring() {
     const instanceId = document.getElementById("instanceId").value;
     const region = document.getElementById("region").value;
-    
-    // if (!instanceId || !region){
-    //     alert("please enter Instance ID and region")
-    //     return
-    // }
+    console.log("instance ID:", instanceId)
+    console.log("region:", region)
+
+    if (!instanceId || !region){
+        alert("please enter Instance ID and region")
+        return
+    }
     monitoring = true;
     document.getElementById("stopBtn").style.display = "inline";
 
