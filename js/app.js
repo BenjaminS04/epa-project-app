@@ -59,8 +59,8 @@ function updateMetricsDisplay(data) {
 }
 
 async function startMonitoring() {
-    var instanceId = document.getElementById("instanceId").Value;
-    var region = document.getElementById("region").Value;
+    const instanceId = document.getElementById("instanceId").Value;
+    const region = document.getElementById("region").Value;
     
     // if (!instanceId || !region){
     //     alert("please enter Instance ID and region")
