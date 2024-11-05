@@ -62,10 +62,10 @@ async function startMonitoring() {
     const instanceId = document.getElementById("instanceId").Value;
     const region = document.getElementById("region").Value;
     
-    if (!instanceId || !region){
-        alert("please enter Instance ID and region")
-        return
-    }
+    // if (!instanceId || !region){
+    //     alert("please enter Instance ID and region")
+    //     return
+    // }
     monitoring = true;
     document.getElementById("stopBtn").style.display = "inline";
 
