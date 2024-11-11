@@ -5,16 +5,7 @@ const dataPoints = {
     cpu:[],
     diskRead:[]
 }
-// initialise AWS SDK
-function initAWS(region) {
-    console.log("initAWS running");
-    AWS.config.region = region
-    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-        IdentityPoolId:'' //leave empty as app should use the instance's assigned role
-    })
-    console.log("credentials set and cloudwatch to be returned");
-    return new AWS.CloudWatch();
-}
+
 // Defines the parameters for the GetMetricData API request, async used to allow use of promise
 async function getMetrics(cloudwatch, instanceId) {
     console.log("defining parameters for getmetricdata api");
