@@ -9,7 +9,7 @@ async function startMonitoring() {
     console.log("instance ID:", instanceId);
     console.log("region:", region);
 
-    if (!instanceId || !region){
+    if (!instanceId || !region){ // checks for input
         alert("please enter Instance ID and region");
         return
     }
@@ -53,14 +53,14 @@ async function startMonitoring() {
     function stopMonitoring() {
         monitoring = false;
         clearInterval(monitoringInterval);
-        document.getElementById("stopBtn").style.display ="none";
+        document.getElementById("stopBtn").style.display = "none";
     }
 }
 
 //function to update metrics
 function updateMetricsDisplay(data) {
     const cpuUtilization= data.MetricDataResults.find(
-        (metric) => metric.Id ==='cpuUtilization'
+        (metric) => metric.Id === 'cpuUtilization'
     );
 
     const cpuValue = cpuUtilization.Values.length > 0
