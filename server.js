@@ -9,43 +9,49 @@ app.use(bodyParser.json());
 
 // Endpoint to fetch metrics
 app.post('/api/getMetrics', async(req, res) => {
-    const {instanceId, region} = req.body;
-
-    if (!instanceId || !region) {
-        return res.status(400).json({ error:'instanceid and region are required.'});
-    }
-    
-    AWS.config.update({region}); // configures aws region
-
-    const cloudwatch = new AWS.CloudWatch(); // creates cloudwatch service object
-
-    // set parameters for the getmetrics api call
-    const params = {
-        MetricDataQueries: [
-            {
-                Id: 'cpuUtilization',
-                MetricStat: {
-                    Metric: {
-                        Namespace: 'AWS/EC2',
-                        MetricName: 'CPUUtilization',
-                        Dimensions: [
-                            {
-                                Name: 'InstanceId',
-                                Value: instanceId
-                            }
-                        ]
-                    },
-                    Period: 60, // Get data at 1-minute intervals
-                    Stat: 'Average'
-                },
-                ReturnData: true
-            }
-        ],
-        StartTime: StartTime,
-        EndTime:EndTime
-    };
-
     try {
+        const {instanceId, region} = req.body;
+
+        if (!instanceId || !region) {
+            return res.status(400).json({ error:'instanceid and region are required.'});
+        }
+        
+        AWS.config.update({region}); // configures aws region
+
+        const currentTime = new Date();
+
+        const startTime = new Date(currentTime - (5 * 60 * 1000)); // 5 minutes ago
+        const endTime = currentTime;
+
+        const cloudwatch = new AWS.CloudWatch(); // creates cloudwatch service object
+
+        // set parameters for the getmetrics api call
+        const params = {
+            MetricDataQueries: [
+                {
+                    Id: 'cpuUtilization',
+                    MetricStat: {
+                        Metric: {
+                            Namespace: 'AWS/EC2',
+                            MetricName: 'CPUUtilization',
+                            Dimensions: [
+                                {
+                                    Name: 'InstanceId',
+                                    Value: instanceId
+                                }
+                            ]
+                        },
+                        Period: 60, // Get data at 1-minute intervals
+                        Stat: 'Average'
+                    },
+                    ReturnData: true
+                }
+            ],
+            StartTime: startTime,
+            EndTime: endTime,
+        };
+
+    
         const data = await cloudwatch.getMetricData(params).promise(); // get metric data using defined parameters
         res.json(data);
     }catch(err){
