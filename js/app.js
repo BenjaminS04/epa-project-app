@@ -19,8 +19,6 @@ async function startMonitoring() {
     monitoring = true;
     document.getElementById("stopBtn").style.display = "inline";
 
-    const cloudwatch = initAWS(region);
-
     async function fetchData() {
         try{
             const response = await fetch('/api/getMetrics',{
