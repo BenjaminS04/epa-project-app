@@ -40,7 +40,7 @@ async function startMonitoring() {
             stopMonitoring();
             alert("error fetching metric data!");
         }
-     }
+    }
     console.log("running wait fetch");
     await fetchData();
     console.log("data fetch attempted");

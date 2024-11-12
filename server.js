@@ -6,6 +6,15 @@ const bodyParser =require('body-parser'); // import nody parser middleware
 const app = express();
 app.use(bodyParser.json());
 
+// Global unhandled rejection handler
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection:', reason);
+});
+
+// Global uncaught exception handler
+process.on('uncaughtException', (err) => {
+    console.error('Uncaught Exception:', err);
+});
 
 // Endpoint to fetch metrics
 app.post('/api/getMetrics', async(req, res) => {
@@ -24,6 +33,8 @@ app.post('/api/getMetrics', async(req, res) => {
         const endTime = currentTime;
 
         const cloudwatch = new AWS.CloudWatch(); // creates cloudwatch service object
+        
+        console.log('Fetching metrics from', startTime, 'to', endTime);
 
         // set parameters for the getmetrics api call
         const params = {
@@ -53,6 +64,7 @@ app.post('/api/getMetrics', async(req, res) => {
 
     
         const data = await cloudwatch.getMetricData(params).promise(); // get metric data using defined parameters
+        console.log('Metrics data received:', JSON.stringify(data, null, 2));
         res.json(data);
     }catch(err){
         console.error("error fetching metrics:", err);
