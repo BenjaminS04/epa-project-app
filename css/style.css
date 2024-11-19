@@ -1,37 +1,63 @@
 /*style for webpage body*/
 body {
     font-family: arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #c6c6c6;
     margin: 0;
     padding: 0;
 }
 
 /*centers main container and pads*/
-#app{
-    max-width: 800px;
+.container{
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    border-radius: 8px;
     background: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/*fetch btn style*/
+/*shared style for buttons and inputs*/
+input, button{
+    padding: 8px;
+    margin: 5px;
+    border: 1px solid #dadace;
+    border-radius: 4px;
+}
+
+/*button style*/
 button{
-    background-color: #fff025;
-    color: #f4f4f4;
-    padding: 10px 20px;
+    background-color: #fbff00;
+    color: #b3b300;
     border: none;
     cursor: pointer;
 }
 
 /*button hover effect*/
 button:hover{
-    color: #fff025;
+    color: #e9e980;
+    background-color: #b3b300;
 }
 
-/*fetched api data container style*/
-#dataContainer {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #e0e0e0;    
+/*metric grid style*/
+.metric-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
+
+/*style for metric cards*/
+.metric-card{
+    background-color: #f3f3eb;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #c9c9c9;
+}
+
+/*style for metric values*/
+.metric-value{
+    font-size: 24px;
+    font-weight: bold;
+    color: #161616;
+}
+
+
+
