@@ -26,13 +26,15 @@
             <select id="logGroupName"><option>Loading groups ...</option></select>
             <label for="startTime">Start time (ISO):</label>
             <label for="filterPattern">Filter logs:</label><input type="text" id="filterPattern" >
-            <button onclick= "fetchLogs()">start retrieving logs</button>
-            <button onclick= "stopMonitoring()" id="stopBtn" style="display: none;">Stop</button>
+            <button onclick= "startLogging()">start retrieving logs</button>
+            <button onclick= "stopLogging()" id="stopBtn" style="display: none;">Stop</button>
         </div>
         <!-- grid layout for metrics -->
-        <div class="metrics-grid">
+        <div class="log-grid">
             <!-- spaces for the individual metrics -->
-            <div class="metric-card">
+            <div class="log-card">
+                <h2>log entries</h2>
+                <div class="log-value" id="logs"></div>
                 
             </div>
             
