@@ -24,7 +24,7 @@
             <input type="text" id="region" placeholder="enter instance region here">
             <label for="logGroupName">Log group name:</label>
             <select id="logGroupName"><option>Loading groups ...</option></select>
-            <label for="startTime">Start time (ISO):</label>
+            <label for="startTime">Start time (ISO):</label><input type="text" id="filterPattern" >
             <label for="filterPattern">Filter logs:</label><input type="text" id="filterPattern" >
             <button onclick= "startLogging()">start retrieving logs</button>
             <button onclick= "stopLogging()" id="stopBtn" style="display: none;">Stop</button>
