@@ -211,9 +211,12 @@ async function fetchLogsFromAWS() {
       });
   
       console.error('Error fetching log groups:', error);
-      res.status(500).json({ 
-        message: 'Error retrieving log groups', 
-        error: error.toString() 
+      res.status(500).json({
+        message: 'Detailed error retrieving log groups',
+        errorDetails: {
+          message: error.message,
+          code: error.code
+        }
       });
     }
  });
