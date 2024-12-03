@@ -177,7 +177,9 @@ async function fetchLogsFromAWS() {
   
   // Endpoint to get all log groups
   app.get('/api/getloggroups', async (req, res) => {
-    const region = req.query.region;
+    const region = req.query.region || "us-east-1";
+
+    AWS.config.update({region}); // configures aws region
     
     if (!region) {
       return res.status(400).json({ message: 'Invalid region specified.' });
