@@ -190,7 +190,11 @@ async function fetchLogsFromAWS() {
       const params = { nextToken: null };
       let logGroups = [];
       let data;
- 
+      // test call to verify connectivity
+      const testParams = { limit: 1 };
+      const test = await cloudwatchlogs.describeLogGroups(testParams).promise();
+      console.log('Test log groups fetch:', test);
+  
       do {
         data = await cloudwatchlogs.describeLogGroups(params).promise();
         logGroups = logGroups.concat(data.logGroups);
@@ -199,6 +203,13 @@ async function fetchLogsFromAWS() {
  
       res.json(logGroups);
     } catch (error) {
+      console.error('FULL ERROR DETAILS:', {
+        message: error.message,
+        code: error.code,
+        name: error.name,
+        stack: error.stack
+      });
+  
       console.error('Error fetching log groups:', error);
       res.status(500).json({ 
         message: 'Error retrieving log groups', 
