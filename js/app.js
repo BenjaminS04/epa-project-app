@@ -76,7 +76,12 @@ function updateMetricsDisplay(data) {
 
 
 
-// ---------- functions for logging ----------
+
+// -------------------- functions for logging --------------------
+
+
+
+
 
 let loggingInterval = null; // Variable to store the interval ID
 

@@ -177,30 +177,33 @@ async function fetchLogsFromAWS() {
   
   // Endpoint to get all log groups
   app.get('/api/getloggroups', async (req, res) => {
-    const region = req.query.region; 
-  
+    const region = req.query.region;
+    
     if (!region) {
       return res.status(400).json({ message: 'Invalid region specified.' });
     }
-  
-    // Create a new CloudWatchLogs instance with the specified region
-    const cloudwatchlogs = new AWS.CloudWatchLogs({ region });
-  
+ 
     try {
-      const params = {};
+      const cloudwatchlogs = new AWS.CloudWatchLogs({ region });
+      const params = { nextToken: null };
       let logGroups = [];
       let data;
+ 
       do {
         data = await cloudwatchlogs.describeLogGroups(params).promise();
         logGroups = logGroups.concat(data.logGroups);
-        params.nextToken = data.nextToken;
+        params.nextToken = data.nextToken || null;
       } while (data.nextToken);
+ 
       res.json(logGroups);
     } catch (error) {
       console.error('Error fetching log groups:', error);
-      res.status(500).send('Error retrieving log groups');
+      res.status(500).json({ 
+        message: 'Error retrieving log groups', 
+        error: error.toString() 
+      });
     }
-  });
+ });
 
 
 //start server on specified port
