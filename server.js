@@ -89,20 +89,13 @@ async function fetchLogsFromAWS() {
     // Create a new CloudWatchLogs instance with the specified region
     const cloudwatchlogs = new AWS.CloudWatchLogs({ region });
   
-    // Modify filterPattern to include instanceId
-    let finalFilterPattern = filterPattern || '';
-  
-    if (finalFilterPattern) {
-      finalFilterPattern += ` && @logStream LIKE /${instanceId}/`;
-    } else {
-      finalFilterPattern = `@logStream LIKE /${instanceId}/`;
-    }
-  
+    
     const params = {
       logGroupName,
+      logStreamNames: [instanceId], //logstreams are set to instance id for this to work
       startTime,
       endTime,
-      filterPattern: finalFilterPattern,
+      filterPattern,
       limit: 100, // Adjust as needed
     };
   
@@ -110,6 +103,7 @@ async function fetchLogsFromAWS() {
       const data = await cloudwatchlogs.filterLogEvents(params).promise();
       cachedLogs = data.events; // Update cached logs
       console.log(`Fetched logs from AWS (${region}) at`, new Date().toLocaleString());
+    
     } catch (error) {
       console.error(`Error fetching logs from AWS (${region}):`, error);
     }

@@ -96,6 +96,7 @@ async function fetchLogGroups() {
     if (!response.ok) throw new Error('Network response was not ok');
     const logGroups = await response.json();
     populateLogGroupDropdown(logGroups);
+  
   } catch (error) {
     console.error('Error fetching log groups:', error);
     const dropdown = document.getElementById('logGroupName');
@@ -211,6 +212,7 @@ async function fetchCachedLogs() {
     if (!response.ok) throw new Error('Failed to fetch cached logs');
     const logs = await response.json();
     displayLogs(logs);
+  
   } catch (error) {
     console.error('Error fetching cached logs:', error);
   }
