@@ -85,11 +85,13 @@ function updateMetricsDisplay(data) {
 
 let loggingInterval = null; // Variable to store the interval ID
 
+// Variable to store the interval ID
 document.addEventListener('DOMContentLoaded', fetchLogGroups);
 
+// get log groups for dropdown
 async function fetchLogGroups() {
   try {
-    const response = await fetch(`/api/getloggroups`);
+    const response = await fetch(`/api/getloggroups?region=${encodeURIComponent(region)}`);
     if (!response.ok) throw new Error('Network response was not ok');
     const logGroups = await response.json();
     populateLogGroupDropdown(logGroups);
@@ -100,6 +102,7 @@ async function fetchLogGroups() {
   }
 }
 
+// populate log group dropdown
 function populateLogGroupDropdown(logGroups) {
   const dropdown = document.getElementById('logGroupName');
   if (logGroups.length === 0) {
@@ -110,11 +113,6 @@ function populateLogGroupDropdown(logGroups) {
     .map(logGroup => `<option value="${logGroup.logGroupName}">${logGroup.logGroupName}</option>`)
     .join('');
 }
-
-
- // Variable to store the interval ID
-
-document.addEventListener('DOMContentLoaded', fetchLogGroups);
 
 
 // function to start logging when start logging button is pressed
