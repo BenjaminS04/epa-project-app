@@ -116,31 +116,6 @@ function populateLogGroupDropdown(logGroups) {
 
 document.addEventListener('DOMContentLoaded', fetchLogGroups);
 
-// get log groups function
-async function fetchLogGroups() {
-  try {
-    const response = await fetch(`/api/getloggroups`);
-    if (!response.ok) throw new Error('Network response was not ok');
-    const logGroups = await response.json();
-    populateLogGroupDropdown(logGroups);
-  } catch (error) {
-    console.error('Error fetching log groups:', error);
-    const dropdown = document.getElementById('logGroupName');
-    dropdown.innerHTML = '<option>Error loading log groups</option>';
-  }
-}
-
-// fill dropdown with log groups
-function populateLogGroupDropdown(logGroups) {
-  const dropdown = document.getElementById('logGroupName');
-  if (logGroups.length === 0) {
-    dropdown.innerHTML = '<option>No log groups available</option>';
-    return;
-  }
-  dropdown.innerHTML = logGroups
-    .map(logGroup => `<option value="${logGroup.logGroupName}">${logGroup.logGroupName}</option>`)
-    .join('');
-}
 
 // function to start logging when start logging button is pressed
 async function startLogging() {
