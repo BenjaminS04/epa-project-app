@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', fetchLogGroups);
 
 async function fetchLogGroups() {
   try {
-    const response = await fetch(`api/getloggroups`);
+    const response = await fetch(`/api/getloggroups`);
     if (!response.ok) throw new Error('Network response was not ok');
     const logGroups = await response.json();
     populateLogGroupDropdown(logGroups);
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', fetchLogGroups);
 // get log groups function
 async function fetchLogGroups() {
   try {
-    const response = await fetch(`api/getloggroups`);
+    const response = await fetch(`/api/getloggroups`);
     if (!response.ok) throw new Error('Network response was not ok');
     const logGroups = await response.json();
     populateLogGroupDropdown(logGroups);
@@ -173,7 +173,7 @@ async function startLogging() {
   
     try {
       // Send request to start polling on the backend
-      const response = await fetch(`api/startPolling`, {
+      const response = await fetch(`/api/startPolling`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -208,7 +208,7 @@ async function startLogging() {
 async function stopLogging() {
   try {
     // Send request to stop polling on the backend
-    const response = await fetch(`api/stopPolling`, {
+    const response = await fetch(`/api/stopPolling`, {
       method: 'POST',
     });
 
@@ -233,7 +233,7 @@ async function stopLogging() {
 // Function to fetch cached logs from backend
 async function fetchCachedLogs() {
   try {
-    const response = await fetch(`api/getCachedLogs`);
+    const response = await fetch(`/api/getCachedLogs`);
     if (!response.ok) throw new Error('Failed to fetch cached logs');
     const logs = await response.json();
     displayLogs(logs);
