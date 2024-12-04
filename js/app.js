@@ -91,6 +91,7 @@ document.addEventListener('DOMContentLoaded', fetchLogGroups);
 // get log groups for dropdown
 async function fetchLogGroups() {
   try {
+    const region = document.getElementById('region').value || 'us-east-1';
     const response = await fetch(`/api/getloggroups?region=${encodeURIComponent(region)}`);
     if (!response.ok) throw new Error('Network response was not ok');
     const logGroups = await response.json();
