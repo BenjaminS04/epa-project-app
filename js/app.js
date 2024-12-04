@@ -200,6 +200,7 @@ async function stopLogging() {
     document.getElementById('stopLogBtn').style.display = 'none';
 
     // Hide logs
+    const logsContainer = document.querySelector('.log-value');
     logsContainer.innerHTML = '<p>No logs found for the specified parameters.</p>';
 
   } catch (error) {
