@@ -199,6 +199,9 @@ async function stopLogging() {
     document.getElementById('startLogBtn').style.display = 'inline';
     document.getElementById('stopLogBtn').style.display = 'none';
 
+    // Hide logs
+    logsContainer.innerHTML = '<p>No logs found for the specified parameters.</p>';
+
   } catch (error) {
     console.error('Error stopping logging:', error);
     alert('Error stopping logging: ' + error.message);
