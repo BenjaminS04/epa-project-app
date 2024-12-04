@@ -198,6 +198,7 @@ async function fetchLogsFromAWS() {
       } while (nextToken);
   
       res.json(logGroups);
+    
     } catch (error) {
       console.error('Error fetching log groups:', error);
       res.status(500).json({

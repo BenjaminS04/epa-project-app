@@ -43,7 +43,7 @@ async function startMonitoring() {
     console.log("starting monitoring");
 
     monitoring = true;
-    document.getElementById("stopBtn").style.display = "inline";
+    document.getElementById("stopMetricBtn").style.display = "inline";
 
     
     console.log("running wait fetch");
@@ -59,7 +59,7 @@ async function startMonitoring() {
 function stopMonitoring() {
     monitoring = false;
     clearInterval(monitoringInterval);
-    document.getElementById("stopBtn").style.display = "none";
+    document.getElementById("stopMetricBtn").style.display = "none";
 }
 
 //function to update metrics
@@ -169,8 +169,8 @@ async function startLogging() {
       loggingInterval = setInterval(fetchCachedLogs, 5000); // Fetch cached logs every 5 seconds
   
       // Show the Stop button and hide the Start button
-      document.getElementById('startBtn').style.display = 'none';
-      document.getElementById('stopBtn').style.display = 'inline';
+      document.getElementById('startLogBtn').style.display = 'none';
+      document.getElementById('stopLogBtn').style.display = 'inline';
   
     } catch (error) {
       console.error('Error starting logging:', error);
@@ -195,8 +195,8 @@ async function stopLogging() {
     }
 
     // Hide the Stop button and show the Start button
-    document.getElementById('startBtn').style.display = 'inline';
-    document.getElementById('stopBtn').style.display = 'none';
+    document.getElementById('startLogBtn').style.display = 'inline';
+    document.getElementById('stopLogBtn').style.display = 'none';
 
   } catch (error) {
     console.error('Error stopping logging:', error);
