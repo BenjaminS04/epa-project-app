@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <!-- meta tags for scaling on mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EC2 Live Metrics</title>
+    <title>EC2 Live Logs</title>
     <!-- Include external libraries for charting and AWS SDK -->
      <script src="https://cdnjs.cloudflare.com/ajax/libs/chart.js/3.7.0/chart.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.1001.0/aws-sdk.min.js"></script>
@@ -12,31 +12,33 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <!-- log page link -->
-     <a href="/html/log-page.html"><button>Logs</button></a>
+    <!-- metric page link -->
+    <a href="/html/index.html"><button>Metrics</button></a>
     <!-- main app container -->
     <div class="container">
         <!-- app title -->
-        <h1>EC2 Live Metrics</h1>
+        <h1>EC2 Live Logs</h1>
         <!-- Input fields for instance id, instance region and start button -->
         <div>
             <input type="text" id="instanceId" placeholder="enter instanceId here">
             <input type="text" id="region" placeholder="enter instance region here">
-            <button onclick= "startMonitoring()">start monitoring</button>
-            <button onclick= "stopMonitoring()" id="stopMetricBtn" style="display: none;">Stop</button>
+            <label for="logGroupName">Log group name:</label>
+            <select id="logGroupName"><option>Loading groups ...</option></select>
+            <label for="startTime">Start time (ISO Format:YYYY-MM-DDTHH:mm):</label><input type="text" id="startTime" >
+            <label for="filterPattern">Filter logs:</label><input type="text" id="filterPattern" >
+            <button onclick= "startLogging()" id="startLogBtn">start retrieving logs</button>
+            <button onclick= "stopLogging()" id="stopLogBtn" style="display: none;">Stop</button>
         </div>
         <!-- grid layout for metrics -->
-        <div class="metric-grid">
+        <div class="log-grid">
             <!-- spaces for the individual metrics -->
-            <div class="metric-card">
-                <h2>CPU Utilization</h2>
-                <div id="cpu" class="metric-value">-</div>
+            <div class="log-card">
+                <h2>log entries</h2>
+                <div class="log-value" id="logs"></div>
+                
             </div>
             
-            <!-- <div class="metric-card">
-                <h2>Disk Reads</h2>
-                <div id="diskRead" class="metric-value">-</div>
-            </div> -->
+            
         </div>
         
     </div>
