@@ -69,6 +69,7 @@ function updateMetricsDisplay(data) {
     const instanceHealth = data.instanceHealth || 'Unknown';
     const healthEl = document.getElementById('instanceHealth');
     
+    
     // for adding colour styling (green/red) to health 
     healthEl.classList.remove('healthy', 'unhealthy');
     healthEl.textContent = instanceHealth;

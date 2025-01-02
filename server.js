@@ -159,7 +159,7 @@ app.post('/api/getMetrics', async(req, res) => {
         }
 
         console.log('Metrics data received:', JSON.stringify(data, null, 2));
-        res.json(data);
+        res.json(data, instanceHealth);
     }catch(err){
         console.error("error fetching metrics:", err);
         res.status(500).json({error: 'error fetching metrics'});
