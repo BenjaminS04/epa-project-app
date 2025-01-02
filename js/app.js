@@ -64,10 +64,7 @@ function stopMonitoring() {
 
 //function to update metrics
 function updateMetricsDisplay(data) {
-    // const cpuUtilization= data.MetricDataResults.find(
-    //     (metric) => metric.Id === 'cpuUtilization'
-    // );
-
+    
     // Instance Health
     const instanceHealth = data.instanceHealth || 'Unknown';
     const healthEl = document.getElementById('instanceHealth');
@@ -82,6 +79,9 @@ function updateMetricsDisplay(data) {
     }
 
     // CpuUtilization
+    const cpuUtilization= data.MetricDataResults.find(
+      (metric) => metric.Id === 'cpuUtilization'
+    );
     const cpuValue = cpuUtilization.Values.length > 0
         ? cpuUtilization.Values[0].toFixed(2)
         : '0.00';
