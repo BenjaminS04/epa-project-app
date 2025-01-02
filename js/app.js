@@ -64,13 +64,21 @@ function stopMonitoring() {
 
 //function to update metrics
 function updateMetricsDisplay(data) {
-    const cpuUtilization= data.MetricDataResults.find(
-        (metric) => metric.Id === 'cpuUtilization'
-    );
+    // const cpuUtilization= data.MetricDataResults.find(
+    //     (metric) => metric.Id === 'cpuUtilization'
+    // );
 
-    if (healthMetric && healthMetric.Values.length > 0) {
-      const healthValue = healthMetric.Values[0]; // 0 = healthy, 1 = fail
-      instanceHealth = healthValue === 0 ? 'Healthy' : 'Unhealthy';
+    // Instance Health
+    const instanceHealth = data.instanceHealth || 'Unknown';
+    const healthEl = document.getElementById('instanceHealth');
+    
+    // for adding colour styling (green/red) to health 
+    healthEl.classList.remove('healthy', 'unhealthy');
+    healthEl.textContent = instanceHealth;
+    if (instanceHealth === 'Healthy') {
+      healthEl.classList.add('healthy'); 
+    } else if (instanceHealth === 'Unhealthy') {
+      healthEl.classList.add('unhealthy'); 
     }
 
     // CpuUtilization

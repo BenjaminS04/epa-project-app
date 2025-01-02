@@ -147,8 +147,17 @@ app.post('/api/getMetrics', async(req, res) => {
             EndTime: endTime,
         };
 
-    
         const data = await cloudwatch.getMetricData(params).promise(); // get metric data using defined parameters
+
+        // Derive instanceHealth => "Healthy" or "Unhealthy" from statusCheckFailed
+        let instanceHealth = 'Unknown';
+        const healthMetric = data.MetricDataResults.find(m => m.Id === 'statusCheckFailed');
+        if (healthMetric && healthMetric.Values && healthMetric.Values.length > 0) {
+          instanceHealth = (healthMetric.Values[0] === 0)
+            ? 'Healthy'
+            : 'Unhealthy';
+        }
+
         console.log('Metrics data received:', JSON.stringify(data, null, 2));
         res.json(data);
     }catch(err){
