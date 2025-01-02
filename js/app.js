@@ -68,10 +68,53 @@ function updateMetricsDisplay(data) {
         (metric) => metric.Id === 'cpuUtilization'
     );
 
+    if (healthMetric && healthMetric.Values.length > 0) {
+      const healthValue = healthMetric.Values[0]; // 0 = healthy, 1 = fail
+      instanceHealth = healthValue === 0 ? 'Healthy' : 'Unhealthy';
+    }
+
+    // CpuUtilization
     const cpuValue = cpuUtilization.Values.length > 0
         ? cpuUtilization.Values[0].toFixed(2)
         : '0.00';
     document.getElementById("cpu").textContent = cpuValue +"%";
+
+    // NetworkIn
+    const networkIn = data.MetricDataResults.find(
+      metric => metric.Id === 'networkIn'
+    );
+    const networkInValue = networkIn && networkIn.Values.length > 0 
+      ? networkIn.Values[0].toFixed(2)
+      : '0.00';
+    document.getElementById("networkIn").textContent = networkInValue + " bytes";
+    
+    // NetworkOut
+    const networkOut = data.MetricDataResults.find(
+      metric => metric.Id === 'networkOut'
+    );
+    const networkOutValue = networkOut && networkOut.Values.length > 0 
+      ? networkOut.Values[0].toFixed(2)
+      : '0.00';
+    document.getElementById("networkOut").textContent = networkOutValue + " bytes";
+    
+    // DiskReadOps
+    const diskReadOps = data.MetricDataResults.find(
+      metric => metric.Id === 'diskReadOps'
+    );
+    const diskReadOpsValue = diskReadOps && diskReadOps.Values.length > 0 
+      ? diskReadOps.Values[0].toFixed(2)
+      : '0.00';
+    document.getElementById("diskReadOps").textContent = diskReadOpsValue;
+    
+    // DiskWriteOps
+    const diskWriteOps = data.MetricDataResults.find(
+      metric => metric.Id === 'diskWriteOps'
+    );
+    const diskWriteOpsValue = diskWriteOps && diskWriteOps.Values.length > 0 
+      ? diskWriteOps.Values[0].toFixed(2)
+      : '0.00';
+    document.getElementById("diskWriteOps").textContent = diskWriteOpsValue;
+
 }
 
 

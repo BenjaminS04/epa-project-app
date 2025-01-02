@@ -39,24 +39,109 @@ app.post('/api/getMetrics', async(req, res) => {
         // set parameters for the getmetrics api call
         const params = {
             MetricDataQueries: [
-                {
-                    Id: 'cpuUtilization',
-                    MetricStat: {
-                        Metric: {
-                            Namespace: 'AWS/EC2',
-                            MetricName: 'CPUUtilization',
-                            Dimensions: [
-                                {
-                                    Name: 'InstanceId',
-                                    Value: instanceId
-                                }
-                            ]
-                        },
-                        Period: 60, // Get data at 1-minute intervals
-                        Stat: 'Average'
-                    },
-                    ReturnData: true
-                }
+              {
+                Id: 'statusCheckFailed',
+                MetricStat: {
+                  Metric: {
+                    Namespace: 'AWS/EC2',
+                    MetricName: 'StatusCheckFailed',
+                    Dimensions: [{ Name: 'InstanceId', Value: instanceId }],
+                  },
+                  Period: 60,
+                  Stat: 'Maximum', // Use Maximum so a single failure shows as 1
+                },
+                ReturnData: true,
+              },
+              {
+                Id: 'cpuUtilization',
+                MetricStat: {
+                  Metric: {
+                    Namespace: 'AWS/EC2',
+                    MetricName: 'CPUUtilization',
+                    Dimensions: [
+                        {
+                            Name: 'InstanceId',
+                            Value: instanceId
+                        }
+                    ]
+                  },
+                  Period: 60, // Get data at 1-minute intervals
+                  Stat: 'Average'
+                },
+                ReturnData: true
+              },
+              {
+                Id: 'networkIn',
+                MetricStat: {
+                  Metric: {
+                    Namespace: 'AWS/EC2',
+                    MetricName: 'NetworkIn',
+                    Dimensions: [
+                      {
+                        Name: 'InstanceId',
+                        Value: instanceId
+                      }
+                    ]
+                  },
+                  Period: 60, // Get data at 1-minute intervals
+                  Stat: 'Average'
+                },
+                ReturnData: true
+              },
+              {
+                Id: 'networkOut',
+                MetricStat: {
+                  Metric: {
+                    Namespace: 'AWS/EC2',
+                    MetricName: 'NetworkOut',
+                    Dimensions: [
+                      {
+                        Name: 'InstanceId',
+                        Value: instanceId
+                      }
+                    ]
+                  },
+                  Period: 60, // Get data at 1-minute intervals
+                  Stat: 'Average'
+                },
+                ReturnData: true
+              },
+              {
+                Id: 'diskReadOps',
+                MetricStat: {
+                  Metric: {
+                    Namespace: 'AWS/EC2',
+                    MetricName: 'DiskReadOps',
+                    Dimensions: [
+                      {
+                        Name: 'InstanceId',
+                        Value: instanceId
+                      }
+                    ]
+                  },
+                  Period: 60, // Get data at 1-minute intervals
+                  Stat: 'Average'
+                },
+                ReturnData: true
+              },
+              {
+                Id: 'diskWriteOps',
+                MetricStat: {
+                  Metric: {
+                    Namespace: 'AWS/EC2',
+                    MetricName: 'DiskWriteOps',
+                    Dimensions: [
+                      {
+                        Name: 'InstanceId',
+                        Value: instanceId
+                      }
+                    ]
+                  },
+                  Period: 60, // Get data at 1-minute intervals
+                  Stat: 'Average'
+                },
+                ReturnData: true
+              }
             ],
             StartTime: startTime,
             EndTime: endTime,

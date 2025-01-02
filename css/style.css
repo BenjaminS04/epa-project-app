@@ -59,5 +59,15 @@ button:hover{
     color: #161616;
 }
 
+.metric-value.healthy {
+    color: green;
+    font-weight: bold;
+}
+
+.metric-value.unhealthy {
+    color: red;
+    font-weight: bold;
+}
+
 
 
