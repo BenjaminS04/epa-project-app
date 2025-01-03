@@ -90,6 +90,15 @@ function updateMetricsDisplay(data) {
         : '0.00';
     document.getElementById("cpu").textContent = cpuValue +"%";
 
+    // memoryUtilization
+    const memoryMetric = data.MetricDataResults.find(
+      metric => metric.Id === 'memoryUtilization'
+    );
+    const memoryValue = memoryMetric.Values.length > 0
+      ? memoryValue = memoryMetric.Values[0].toFixed(2)
+      : '0.00'
+    document.getElementById("memory").textContent = memoryValue + "%";
+
     // NetworkIn
     const networkIn = data.MetricDataResults.find(
       metric => metric.Id === 'networkIn'
