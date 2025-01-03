@@ -78,16 +78,6 @@ function updateMetricsDisplay(data) {
         : 'Unhealthy';
     }
 
-    
-    // for adding colour styling (green/red) to health 
-    healthEl.classList.remove('healthy', 'unhealthy');
-    healthEl.textContent = instanceHealth;
-    if (instanceHealth === 'Healthy') {
-      healthEl.classList.add('healthy'); 
-    } else if (instanceHealth === 'Unhealthy') {
-      healthEl.classList.add('unhealthy'); 
-    }
-
     // CpuUtilization
     const cpuUtilization= data.MetricDataResults.find(
       metric => metric.Id === 'cpuUtilization'

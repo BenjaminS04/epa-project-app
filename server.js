@@ -29,7 +29,7 @@ app.post('/api/getMetrics', async(req, res) => {
 
         const currentTime = new Date();
 
-        const startTime = new Date(currentTime - (60 * 1000)); // 1 minutes ago
+        const startTime = new Date(currentTime - (5 * 60 * 1000)); // 5 minutes ago
         const endTime = currentTime;
 
         const cloudwatch = new AWS.CloudWatch(); // creates cloudwatch service object
