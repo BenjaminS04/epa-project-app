@@ -31,6 +31,8 @@ app.post('/api/getMetrics', async(req, res) => {
 
         const startTime = new Date(currentTime - (5 * 60 * 1000)); // 5 minutes ago
         const endTime = currentTime;
+        // Calculate the total number of seconds in the 15-minute window
+        const totalSeconds = Math.floor((endTime - startTime) / 1000);
 
         const cloudwatch = new AWS.CloudWatch(); // creates cloudwatch service object
         
@@ -47,7 +49,7 @@ app.post('/api/getMetrics', async(req, res) => {
                     MetricName: 'StatusCheckFailed',
                     Dimensions: [{ Name: 'InstanceId', Value: instanceId }],
                   },
-                  Period: 60,
+                  Period: totalSeconds,
                   Stat: 'Maximum', // Use Maximum so a single failure shows as 1
                 },
                 ReturnData: true,

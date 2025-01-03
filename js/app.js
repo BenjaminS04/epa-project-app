@@ -72,10 +72,15 @@ function updateMetricsDisplay(data) {
     // Derive instanceHealth => "Healthy" or "Unhealthy" from statusCheckFailed
     
     const healthMetric = data.MetricDataResults.find(metric => metric.Id === 'statusCheckFailed');
+    console.log(healthMetric)
+    
     if (healthMetric && healthMetric.Values && healthMetric.Values.length > 0) {
       instanceHealth = (healthMetric.Values[0] === 0)
         ? 'Healthy'
         : 'Unhealthy';
+    }else {
+      // Fallback if no data is returned
+      instanceHealth = 'Unknown'; 
     }
 
     // CpuUtilization
