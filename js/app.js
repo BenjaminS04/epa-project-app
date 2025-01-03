@@ -96,7 +96,7 @@ function updateMetricsDisplay(data) {
     );
     const memoryValue = data.memoryMetric.Values.length > 0
       ? memoryMetric.Values[0].toFixed(2)
-      : '0.00'
+      : '0.00';
     document.getElementById("memory").textContent = memoryValue + "%";
 
     // NetworkIn
