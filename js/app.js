@@ -66,22 +66,22 @@ function stopMonitoring() {
 function updateMetricsDisplay(data) {
     
     // Instance Health
-    const instanceHealth = data.instanceHealth || 'Unknown';
-    const healthEl = document.getElementById('instanceHealth');
-
-    // Derive instanceHealth => "Healthy" or "Unhealthy" from statusCheckFailed
-    
-    const healthMetric = data.MetricDataResults.find(metric => metric.Id === 'statusCheckFailed');
-    console.log(healthMetric)
-    
-    if (healthMetric && healthMetric.Values && healthMetric.Values.length > 0) {
-      instanceHealth = (healthMetric.Values[0] === 0)
-        ? 'Healthy'
-        : 'Unhealthy';
-    }else {
-      // Fallback if no data is returned
-      instanceHealth = 'Unknown'; 
+    const healthMetric = data.MetricDataResults.find(
+      metric => metric.Id === 'statusCheckFailed'
+    );
+    const healthValue = healthMetric.Values.length > 0
+        ? healthMetric.Values[0]
+        : 2;
+    if (healthValue==0){
+      document.getElementById("instance").textContent = "healthy";
+    }else if(healthValue==1){
+      document.getElementById("instance").textContent = "unhealthy";
+    }else{
+      document.getElementById("instance").textContent = "unknown";
     }
+
+    // 3. Update the DOM (or console) accordingly
+    document.getElementById('instanceHealth').textContent = instanceHealth;
 
     // CpuUtilization
     const cpuUtilization= data.MetricDataResults.find(
