@@ -68,7 +68,16 @@ function updateMetricsDisplay(data) {
     // Instance Health
     const instanceHealth = data.instanceHealth || 'Unknown';
     const healthEl = document.getElementById('instanceHealth');
+
+    // Derive instanceHealth => "Healthy" or "Unhealthy" from statusCheckFailed
     
+    const healthMetric = data.MetricDataResults.find(metric => metric.Id === 'statusCheckFailed');
+    if (healthMetric && healthMetric.Values && healthMetric.Values.length > 0) {
+      instanceHealth = (healthMetric.Values[0] === 0)
+        ? 'Healthy'
+        : 'Unhealthy';
+    }
+
     
     // for adding colour styling (green/red) to health 
     healthEl.classList.remove('healthy', 'unhealthy');
@@ -81,7 +90,7 @@ function updateMetricsDisplay(data) {
 
     // CpuUtilization
     const cpuUtilization= data.MetricDataResults.find(
-      (metric) => metric.Id === 'cpuUtilization'
+      metric => metric.Id === 'cpuUtilization'
     );
     const cpuValue = cpuUtilization.Values.length > 0
         ? cpuUtilization.Values[0].toFixed(2)
