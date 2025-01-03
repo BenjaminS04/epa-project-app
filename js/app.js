@@ -94,7 +94,7 @@ function updateMetricsDisplay(data) {
     const memoryMetric = data.MetricDataResults.find(
       metric => metric.Id === 'memoryUtilization'
     );
-    const memoryValue = data.memoryMetric.Values.length > 0
+    const memoryValue = memoryMetric.Values.length > 0
       ? memoryMetric.Values[0].toFixed(2)
       : '0.00';
     document.getElementById("memory").textContent = memoryValue + "%";

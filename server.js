@@ -79,10 +79,13 @@ app.post('/api/getMetrics', async(req, res) => {
                     Namespace: 'CWAgent',           
                     MetricName: 'MemoryUtilization', 
                     Dimensions: [
-                      { Name: 'InstanceId', Value: instanceId }
+                      { 
+                        Name: 'InstanceId',
+                        Value: instanceId 
+                      }
                     ]
                   },
-                  Period: 60,
+                  Period: totalSeconds,
                   Stat: 'Average'
                 },
                 ReturnData: true
