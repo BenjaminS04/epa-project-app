@@ -80,9 +80,7 @@ function updateMetricsDisplay(data) {
       document.getElementById("instance").textContent = "unknown";
     }
 
-    // 3. Update the DOM (or console) accordingly
-    document.getElementById('instanceHealth').textContent = instanceHealth;
-
+    
     // CpuUtilization
     const cpuUtilization= data.MetricDataResults.find(
       metric => metric.Id === 'cpuUtilization'
