@@ -107,43 +107,8 @@ app.post('/api/getMetrics', async(req, res) => {
                   Stat: 'Average'
                 },
                 ReturnData: true
-              },
-              {
-                Id: 'diskReadOps',
-                MetricStat: {
-                  Metric: {
-                    Namespace: 'AWS/EC2',
-                    MetricName: 'DiskReadOps',
-                    Dimensions: [
-                      {
-                        Name: 'InstanceId',
-                        Value: instanceId
-                      }
-                    ]
-                  },
-                  Period: 60, // Get data at 1-minute intervals
-                  Stat: 'Average'
-                },
-                ReturnData: true
-              },
-              {
-                Id: 'diskWriteOps',
-                MetricStat: {
-                  Metric: {
-                    Namespace: 'AWS/EC2',
-                    MetricName: 'DiskWriteOps',
-                    Dimensions: [
-                      {
-                        Name: 'InstanceId',
-                        Value: instanceId
-                      }
-                    ]
-                  },
-                  Period: 60, // Get data at 1-minute intervals
-                  Stat: 'Average'
-                },
-                ReturnData: true
               }
+              
             ],
             StartTime: startTime,
             EndTime: endTime,

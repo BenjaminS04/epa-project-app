@@ -108,24 +108,6 @@ function updateMetricsDisplay(data) {
       : '0.00';
     document.getElementById("networkOut").textContent = networkOutValue + " bytes";
     
-    // DiskReadOps
-    const diskReadOps = data.MetricDataResults.find(
-      metric => metric.Id === 'diskReadOps'
-    );
-    const diskReadOpsValue = diskReadOps && diskReadOps.Values.length > 0 
-      ? diskReadOps.Values[0].toFixed(2)
-      : '0.00';
-    document.getElementById("diskReadOps").textContent = diskReadOpsValue;
-    
-    // DiskWriteOps
-    const diskWriteOps = data.MetricDataResults.find(
-      metric => metric.Id === 'diskWriteOps'
-    );
-    const diskWriteOpsValue = diskWriteOps && diskWriteOps.Values.length > 0 
-      ? diskWriteOps.Values[0].toFixed(2)
-      : '0.00';
-    document.getElementById("diskWriteOps").textContent = diskWriteOpsValue;
-
 }
 
 
